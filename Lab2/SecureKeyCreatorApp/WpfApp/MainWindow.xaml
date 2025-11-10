@@ -1,0 +1,107 @@
+﻿    <Window x:Class="WpfApp.MainWindow"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:local="clr-namespace:WpfApp"
+            mc:Ignorable="d"
+            Title="Secure App Generator" Height="620" Width="620"
+            WindowStartupLocation="CenterScreen"
+            Background="#f8f9fa">
+
+        <Window.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="Padding" Value="12"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush" Value="#e9ecef"/>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Foreground" Value="#495057"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Foreground" Value="#495057"/>
+                <Setter Property="Margin" Value="0,0,0,8"/>
+            </Style>
+
+            <Style x:Key="GenerateButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="#28a745"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Padding" Value="20,12"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Style.Triggers>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Background" Value="#6c757d"/>
+                        <Setter Property="Foreground" Value="#dee2e6"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#218838"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Window.Resources>
+
+        <Grid Margin="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <TextBlock Grid.Row="0" Text="Secure Application Generator" 
+                       FontSize="24" FontWeight="Bold" Foreground="#343a40"
+                       HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+            <!-- Folder Input -->
+            <StackPanel Grid.Row="1" Margin="0,0,0,15">
+                <Label Content="Destination Folder (absolute or relative path)"/>
+                <Border  x:Name="TextBoxFolderBorder" BorderThickness="2" BorderBrush="#e9ecef" CornerRadius="6">
+                    <TextBox x:Name="TextBoxFolder" Text="./"
+                            TextChanged="TextBox_TextChanged"/>
+                </Border>
+            </StackPanel>
+
+            <!-- Filename Input -->
+            <StackPanel Grid.Row="2" Margin="0,0,0,15">
+                <Label Content="Output File Name"/>
+                <DockPanel>
+                    <Border x:Name="TextBoxNameBorder" BorderThickness="2" BorderBrush="#e9ecef" CornerRadius="6" DockPanel.Dock="Left">
+                        <TextBox x:Name="TextBoxName" Text="SECRET" 
+                                TextChanged="TextBoxName_TextChanged" MinWidth="50"/>
+                    </Border>
+                    <TextBlock Text=".exe" FontSize="14" Foreground="#6c757d" 
+                              VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </DockPanel>
+            </StackPanel>
+
+            <!-- Content Input -->
+        <StackPanel Grid.Row="3" Margin="0,0,0,15">
+            <Label Content="Secure Content"/>
+            <Border BorderThickness="2" BorderBrush="#e9ecef" CornerRadius="6">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="135">
+                    <TextBox x:Name="TextBoxSecret" Text="♥♥♥I LOVE FEDCHUCK♥♥♥" 
+                                AcceptsReturn="True" TextWrapping="Wrap" 
+                                FontSize="14" Padding="12"
+                                TextChanged="RichTextBox_TextChanged"
+                                VerticalAlignment="Top"/>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+
+        <!-- Generate Button -->
+            <Button x:Name="Button" Grid.Row="5" 
+                   Content="GENERATE SECURE APPLICATION" 
+                   Style="{StaticResource GenerateButtonStyle}"
+                   Click="Button_Click"
+                   HorizontalAlignment="Stretch"/>
+        </Grid>
+    </Window>
